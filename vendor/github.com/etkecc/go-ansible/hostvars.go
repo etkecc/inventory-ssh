@@ -133,11 +133,11 @@ func (hv HostVars) Yes(missing bool, key string) bool {
 }
 
 func (hv HostVars) OSUser() string {
-	return hv.String("matrix_user_username", "matrix")
+	return hv.String("matrix_user_name", "matrix")
 }
 
 func (hv HostVars) OSGroup() string {
-	return hv.String("matrix_user_groupname", "matrix")
+	return hv.String("matrix_group_name", "matrix")
 }
 
 func (hv HostVars) OSPath() string {
@@ -155,6 +155,9 @@ func (hv HostVars) FQN(key string) string {
 	if v == "" {
 		if key == "grafana" {
 			key = "stats"
+		}
+		if key == "element_call" {
+			key = "call"
 		}
 		if base != "" {
 			return key + "." + base
@@ -217,7 +220,7 @@ func (hv HostVars) IsAdmin(input string) bool {
 
 // Email returns email
 func (hv HostVars) Email() string {
-	keys := []string{"etke_service_monitoring_email", "matrix_monitoring_email", "traefik_config_certificatesResolvers_acme_email", "matrix_ssl_lets_encrypt_support_email"}
+	keys := []string{"etke_service_monitoring_email", "etke_order_email", "etke_subscription_email"}
 	for _, key := range keys {
 		if email := hv.String(key); email != "" {
 			return email
@@ -229,7 +232,7 @@ func (hv HostVars) Email() string {
 // Emails returns all emails
 func (hv HostVars) Emails() []string {
 	emails := []string{}
-	keys := []string{"etke_service_monitoring_email", "matrix_monitoring_email", "traefik_config_certificatesResolvers_acme_email", "matrix_ssl_lets_encrypt_support_email", "etke_subscription_email", "etke_payment_email"}
+	keys := []string{"etke_service_monitoring_email", "etke_order_email", "etke_subscription_email"}
 	for _, key := range keys {
 		if email := hv.String(key); email != "" {
 			emails = append(emails, email)
