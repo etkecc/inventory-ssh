@@ -3,9 +3,9 @@ package ansible
 import (
 	"strings"
 
-	"github.com/etkecc/ansible-ssh/internal/config"
-	"github.com/etkecc/ansible-ssh/internal/logger"
 	"github.com/etkecc/go-ansible"
+	"github.com/etkecc/inventory-ssh/internal/config"
+	"github.com/etkecc/inventory-ssh/internal/logger"
 )
 
 // inventoryPrefixWorkaround is a workaround for ssh key path defined in the inventory/host_vars/DOMAIN/vars.yml file

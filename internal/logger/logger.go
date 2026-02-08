@@ -7,7 +7,7 @@ import (
 
 var (
 	withDebug bool
-	logger    = log.New(os.Stdout, "[ansible-ssh] ", 0)
+	logger    = log.New(os.Stdout, "[inventory-ssh] ", 0)
 )
 
 // Configure the logger package

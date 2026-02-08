@@ -5,10 +5,10 @@ import (
 
 	"github.com/adrg/xdg"
 
-	"github.com/etkecc/ansible-ssh/internal/ansible"
-	"github.com/etkecc/ansible-ssh/internal/config"
-	"github.com/etkecc/ansible-ssh/internal/logger"
-	"github.com/etkecc/ansible-ssh/internal/ssh"
+	"github.com/etkecc/inventory-ssh/internal/ansible"
+	"github.com/etkecc/inventory-ssh/internal/config"
+	"github.com/etkecc/inventory-ssh/internal/logger"
+	"github.com/etkecc/inventory-ssh/internal/ssh"
 )
 
 func main() {
@@ -17,13 +17,13 @@ func main() {
 		return
 	}
 
-	path, err := xdg.SearchConfigFile("ansible-ssh.yml")
+	path, err := xdg.SearchConfigFile("inventory-ssh.yml")
 	if err != nil {
-		logger.Fatal("cannot find the ansible-ssh.yml config file:", err)
+		logger.Fatal("cannot find the inventory-ssh.yml config file:", err)
 	}
 	cfg, err := config.Read(path)
 	if err != nil {
-		logger.Fatal("cannot read the ansible-ssh.yml config file:", err)
+		logger.Fatal("cannot read the inventory-ssh.yml config file:", err)
 	}
 	logger.Configure(cfg.Debug)
 

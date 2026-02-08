@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/etkecc/ansible-ssh/internal/logger"
 	"github.com/etkecc/go-ansible"
+	"github.com/etkecc/inventory-ssh/internal/logger"
 )
 
 var legitExitCode = map[int]bool{

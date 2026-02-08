@@ -1,4 +1,4 @@
-module github.com/etkecc/ansible-ssh
+module github.com/etkecc/inventory-ssh
 
 go 1.24.0
 
