@@ -9,6 +9,7 @@ github.com/etkecc/go-ansible
 # github.com/etkecc/go-kit v1.8.0
 ## explicit; go 1.22
 github.com/etkecc/go-kit
+github.com/etkecc/go-kit/crypter
 # golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90
 ## explicit; go 1.25.0
 golang.org/x/exp/slices
