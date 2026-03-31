@@ -1,8 +1,6 @@
 module github.com/etkecc/inventory-ssh
 
-go 1.24.0
-
-toolchain go1.24.6
+go 1.25.0
 
 require (
 	github.com/adrg/xdg v0.5.3
@@ -11,7 +9,7 @@ require (
 )
 
 require (
-	github.com/etkecc/go-kit v1.7.3 // indirect
-	golang.org/x/exp v0.0.0-20250819193227-8b4c13bb791b // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	github.com/etkecc/go-kit v1.8.0 // indirect
+	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 )

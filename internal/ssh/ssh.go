@@ -54,7 +54,7 @@ func buildCMD(sshCmd string, host *ansible.Host, strict bool) *exec.Cmd {
 		}
 		sshArgs = append(sshArgs, osArgs...)
 		logger.Debug("command:", sshCmd, sshArgs)
-		return exec.Command(sshCmd, sshArgs...)
+		return exec.Command(sshCmd, sshArgs...) //nolint:gosec // comand is defined in config file, intended
 	}
 
 	logger.Debug("command:", sshCmd, buildArgs(sshArgs, osArgs, host))
