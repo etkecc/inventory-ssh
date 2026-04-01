@@ -1,34 +1,45 @@
 package logger
 
 import (
-	"log"
+	"fmt"
 	"os"
+	"strings"
+
+	"github.com/etkecc/inventory-ssh/internal/tui"
 )
 
-var (
-	withDebug bool
-	logger    = log.New(os.Stdout, "[inventory-ssh] ", 0)
+const (
+	ansiReset = "\033[0m"
+	ansiDim   = "\033[2m"
+	prefix    = "[inventory-ssh] "
 )
 
-// Configure the logger package
+var withDebug bool
+
+// Configure the logger package.
 func Configure(debug bool) {
 	withDebug = debug
 }
 
-// Println logs the arguments to the standard logger.
+// Println logs the arguments as an info message.
 func Println(args ...any) {
-	logger.Println(args...)
+	tui.Info(prefix + sprint(args...))
 }
 
-// Debug logs the arguments to the standard logger if the debug flag is set.
+// Debug logs the arguments to stderr if the debug flag is set.
 func Debug(args ...any) {
 	if !withDebug {
 		return
 	}
-	logger.Println(args...)
+	fmt.Fprintln(os.Stderr, ansiDim+prefix+sprint(args...)+ansiReset)
 }
 
-// Fatal logs the arguments to the standard logger and then calls os.Exit(1).
+// Fatal logs the arguments as an error and exits.
 func Fatal(args ...any) {
-	logger.Fatal(args...)
+	tui.Error(prefix + sprint(args...))
+	os.Exit(1)
+}
+
+func sprint(args ...any) string {
+	return strings.TrimSuffix(fmt.Sprintln(args...), "\n")
 }

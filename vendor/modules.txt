@@ -6,7 +6,7 @@ github.com/adrg/xdg/internal/userdirs
 # github.com/etkecc/go-ansible v0.0.0-20250902133106-7152393349f4
 ## explicit; go 1.24.0
 github.com/etkecc/go-ansible
-# github.com/etkecc/go-kit v1.8.0
+# github.com/etkecc/go-kit v1.8.1
 ## explicit; go 1.22
 github.com/etkecc/go-kit
 github.com/etkecc/go-kit/crypter

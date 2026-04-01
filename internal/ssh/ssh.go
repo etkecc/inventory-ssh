@@ -12,6 +12,7 @@ import (
 	"github.com/etkecc/go-kit/crypter"
 
 	"github.com/etkecc/inventory-ssh/internal/logger"
+	"github.com/etkecc/inventory-ssh/internal/tui"
 )
 
 var legitExitCode = map[int]bool{
@@ -69,11 +70,11 @@ func buildCMD(sshCmd string, host *ansible.Host, strict bool, env []string) *exe
 	logger.Debug("command:", sshCmd, args)
 
 	if host.SSHPass != "" {
-		logger.Println("ssh password is:", decrypt(host.SSHPass, env))
+		tui.Success("ssh password", decrypt(host.SSHPass, env))
 	}
 
 	if host.BecomePass != "" && host.User != "root" {
-		logger.Println("become password is:", decrypt(host.BecomePass, env))
+		tui.Success("become password", decrypt(host.BecomePass, env))
 	}
 	return exec.Command(sshCmd, args...) //nolint:gosec // that's intended
 }
@@ -127,7 +128,7 @@ func getCrypter(environ []string) *crypter.Crypter {
 		}
 	}
 
-	return nil
+	return sshCrypter
 }
 
 // decrypt decrypts the password if it's encrypted, otherwise it returns the original password
@@ -143,12 +144,25 @@ func decrypt(password string, environ []string) string {
 	return decrypted
 }
 
+// expandPath expands a leading ~ to the user's home directory.
+func expandPath(p string) string {
+	if !strings.HasPrefix(p, "~/") && p != "~" {
+		return p
+	}
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return p
+	}
+	return home + p[1:]
+}
+
 // decryptFile decrypts the file content if it's encrypted, otherwise it returns the original file path, it creates a temporary file for the decrypted content and returns the temporary file path, the temporary file will be removed after the ssh command is executed
 func decryptFile(filepath string, environ []string) string {
 	c := getCrypter(environ)
 	if c == nil {
 		return filepath
 	}
+	filepath = expandPath(filepath)
 	if _, err := os.Stat(filepath); os.IsNotExist(err) {
 		logger.Fatal("cannot find the file:", filepath)
 		return filepath
