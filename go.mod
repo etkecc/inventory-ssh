@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/adrg/xdg v0.5.3
 	github.com/etkecc/go-ansible v0.0.0-20250902133106-7152393349f4
-	github.com/etkecc/go-kit v1.8.1
+	github.com/etkecc/go-kit v1.8.2
 	gopkg.in/yaml.v3 v3.0.1
 )
 
